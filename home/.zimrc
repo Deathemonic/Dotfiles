@@ -17,16 +17,53 @@ zmodule run-help
 
 # Provides archive and unarchive functions for easy archive manipulation.
 zmodule archive
-# Sets up asdf, with auto install and optimized usage of the direnv plugin.
-# zmodule asdf
+# Adds aliases and better defaults for exa.
+zmodule exa
+# Configures fzf for faster fetching of files and directories names.
+zmodule fzf
+# Provides nice git aliases and functions.
+zmodule git
+# Shown when there is no command and user presses ENTER.
+zmodule magic-enter
+# Manages all python venvs in one place.
+zmodule pvenv
+# Provides a convenient way to load ssh-agent.
+# zmodule ssh
+# Sets a custom terminal title.
+zmodule termtitle
+# Adds utility aliases and functions. Adds colour to ls, grep and less.
+zmodule utility
 
+#
+# Promt
+#
+
+# Exposes to prompts how long the last command took to execute.
+zmodule duration-info
+# Exposes git repository status information to prompts.
+zmodule git-info
+# Formats the current working directory to be used by prompts.
+zmodule prompt-pwd
+# A heavily reduced, ASCII-only version of the Spaceship and Starship prompts.
+zmodule asciiship
+
+#
+# Distro
+# 
+
+# Adds aliases for Homebrew.
+# zmodule homebrew
+# Adds aliases for the pacman package manager.
+zmodule pacman
+
+#
+# Prompt
+#
 
 # Exposes to prompts how long the last command took to execute, used by asciiship.
 zmodule duration-info
 # Exposes git repository status information to prompts, used by asciiship.
 zmodule git-info
-# A heavily reduced, ASCII-only version of the Spaceship and Starship prompts.
-zmodule asciiship
 
 #
 # Completion
@@ -35,8 +72,24 @@ zmodule asciiship
 # Additional completion definitions for Zsh.
 zmodule zsh-users/zsh-completions --fpath src
 # Enables and configures smart and extensive tab completion.
-# completion must be sourced after all modules that add completion definitions.
+# Completion must be sourced after all modules that add completion definitions.
 zmodule completion
+
+#
+# Modules
+#
+
+# Sets up chezmoi in zsh.
+zmodule joke/zim-chezmoi
+# Sets up github-cli in zsh.
+zmodule joke/zim-github-cli
+# Sets up starship prompt in zsh.
+zmodule joke/zim-starship
+# Sets up yq in zsh.
+zmodule joke/zim-yq
+# Sets up zoxide in zsh.
+zmodule kiesman99/zim-zoxide
+
 
 #
 # Modules that must be initialized last
@@ -50,5 +103,3 @@ zmodule zsh-users/zsh-syntax-highlighting
 zmodule zsh-users/zsh-history-substring-search
 # Fish-like autosuggestions for Zsh.
 zmodule zsh-users/zsh-autosuggestions
-# }}} End configuration added by Zim install
-

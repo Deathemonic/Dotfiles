@@ -67,6 +67,18 @@ zstyle ':zim:input' double-dot-expand yes
 zstyle ':zim:termtitle' format '%1~'
 
 #
+# pacman
+#
+
+# Change privilege command between sudo, doas (default: sudo)
+zstyle ':zim:pacman' priv_cmd 'sudo'
+# Set a wrapper if applicable (powerpill, pacmatic, etc)
+zstyle ':zim:pacman' frontend 'powerpill'
+# Add any helper scripts to be loaded
+zstyle ':zim:pacman' helpers 'aur'
+
+
+#
 # zsh-autosuggestions
 #
 
@@ -88,14 +100,15 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 
 # Customize the main highlighter styles.
 # See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/main.md#how-to-tweak-it
-#typeset -A ZSH_HIGHLIGHT_STYLES
-#ZSH_HIGHLIGHT_STYLES[comment]='fg=242'
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[comment]='fg=242'
 
 # ------------------
 # Initialize modules
 # ------------------
 
 ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
+
 # Download zimfw plugin manager if missing.
 if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
   if (( ${+commands[curl]} )); then
@@ -106,10 +119,12 @@ if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
         https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
   fi
 fi
+
 # Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
 if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
   source ${ZIM_HOME}/zimfw.zsh init -q
 fi
+
 # Initialize modules.
 source ${ZIM_HOME}/init.zsh
 
@@ -128,11 +143,18 @@ for key ('^[[B' '^N' ${terminfo[kcud1]}) bindkey ${key} history-substring-search
 for key ('k') bindkey -M vicmd ${key} history-substring-search-up
 for key ('j') bindkey -M vicmd ${key} history-substring-search-down
 unset key
-
+clear
 
 # ------------------
 # User Configuration
 # ------------------
+
+#
+# Promt
+#
+
+# Initialize starship prompt.
+# eval "$(starship init zsh)"
 
 #
 # Alias
@@ -171,5 +193,4 @@ alias gcl='git clone --depth 1'
 alias gi='git init'
 alias ga='git add'
 alias gc='git commit -m'
-alias gp='git push origin master'
-alias vim='nvim'
+alias gp='git push'
